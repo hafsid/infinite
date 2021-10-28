@@ -120,8 +120,9 @@ function draw(){
     brickG.setVelocityXEach(0);
     boy.visible=false;
 
-    if(mousePressedOver(start)){
+    if(touches.length>0 || keyDown("SPACE")){
       gameState="play"
+      touches = []
     }
 
   }
@@ -134,9 +135,10 @@ function draw(){
     back.x = back.width/2
   }
  
-  if(keyDown("space") && boy.y> 200){
+  if(touches.length > 0 || keyDown("space") && boy.y> 200){
     boy.velocityY = -10
     jump.play();
+    touches = [];
   }
 
   boy.velocityY+=0.5;
@@ -160,8 +162,9 @@ function draw(){
     point.play();
   }
 
-  if(mousePressedOver(pause) && gameState === "play"){
+  if(touches.length>0 || keyDown("SPACE") && gameState === "play"){
     gameState = "pause"
+    touches = []
   }
   
  
@@ -205,7 +208,7 @@ function draw(){
 
     boy.visible=false;
 
-    if(mousePressedOver(restart)){
+    if(touches.length>0 || keyDown("SPACE")){
       reset();
     }
   }
